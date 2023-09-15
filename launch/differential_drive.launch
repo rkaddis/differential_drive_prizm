@@ -1,0 +1,18 @@
+<launch> 
+
+    <include file="$(find prizm_ros)/launch/twist_controller.launch" />
+
+    <node name="joy_node" pkg="joy" type="joy_node" required="true" >
+		<param name="dev" value="/dev/input/js1" />
+		<param name="autorepeat_rate" value="10" />
+	</node>
+
+    <include file="$(find simple_camera_publisher)/launch/camera_publisher.launch" >
+			<arg name="source" value="/dev/video2" />
+	</include>
+
+    <node name="differential_drive" pkg="differential_drive_prizm" type="differential_drive.py" required="true" output="screen" />
+
+</launch>
+
+    
